@@ -16,15 +16,10 @@ export const AuthOptions: NextAuthOptions = {
           image: profile.avatar_url,
         };
       },
-    }),
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        return null;
+      authorization: {
+        params: {
+          scope: "identify email connections guilds guilds.members.read",
+        },
       },
     }),
     // ...add more providers here
