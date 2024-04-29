@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   return (
@@ -12,10 +14,15 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col items-center justify-center gap-4">
-        <button className="rounded-lg bg-blue-500 px-6 py-4 ">
-          <Link className="text-white text-2xl" href="#">
-            Sign in with Discord
-          </Link>
+        <button
+          className="rounded-lg bg-blue-500 px-6 py-4"
+          onClick={() =>
+            signIn("discord", {
+              callbackUrl: "http://localhost:3000/api/auth/signin/discord",
+            })
+          }
+        >
+          <span className="text-white text-2xl">Sign in with Discord</span>
         </button>
       </section>
 
