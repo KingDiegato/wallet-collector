@@ -1,5 +1,4 @@
 import prisma from "@/app/lib/db";
-import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function GET() {
