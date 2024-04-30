@@ -6,21 +6,26 @@ export const AuthOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     DiscordProvider({
+      name: "Discord",
       clientId: process.env.DISCORD_CLIENT_ID as string,
       clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
       profile(profile) {
         return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
+          id: profile.id,
+          name: profile.username,
           email: profile.email,
-          image: profile.avatar_url,
+          image: profile.avatar,
         };
       },
       authorization: {
         params: {
           scope: "identify email connections guilds guilds.members.read",
+          userinfo: "true",
         },
       },
+      userinfo: "https://discord.com/api/users/@me",
+      accessTokenUrl: "https://discord.com/api/oauth2/token",
+      token: "https://discord.com/api/oauth2/token",
     }),
     // ...add more providers here
   ],

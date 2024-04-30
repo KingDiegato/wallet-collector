@@ -1,5 +1,6 @@
 "use client";
 import { SessionProvider } from "next-auth/react";
+import { WalletProviderComponent } from "./components/solana/provider";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -12,5 +13,9 @@ export function Provider({
   children,
   pageProps: { session, ...pageProps },
 }: ProviderProps) {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return (
+    <SessionProvider session={session}>
+      <WalletProviderComponent>{children}</WalletProviderComponent>
+    </SessionProvider>
+  );
 }
